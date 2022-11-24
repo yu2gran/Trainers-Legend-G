@@ -23,7 +23,7 @@ namespace UmaCamera {
 	namespace {
 		int cameraType = CAMERA_LIVE;
 		float moveStep = 0.1;
-		float look_radius = 0.1;  // 转向半径
+		float look_radius = 0.0001;  // 转向半径
 		float moveAngel = 3.5;  // 转向角度
 
 		float horizontalAngle = 0;  // 水平方向角度
@@ -32,7 +32,7 @@ namespace UmaCamera {
 		float raceDefaultFOV = 12;
 		int smoothLevel = 5;
 		unsigned long sleepTime = 2;
-		Vector3_t cameraPos{ 0.093706, 0.467159, 9.588791 };
+		Vector3_t cameraPos{ 0.0, 0.0, 0.0 };
 		Vector3_t cameraLookAt{ cameraPos.x, cameraPos.y, cameraPos.z - look_radius };
 		bool orig_lookat_target = g_race_freecam_lookat_umamusume;
 		float orig_g_race_freecam_follow_umamusume_distance = g_race_freecam_follow_umamusume_distance;
@@ -153,7 +153,7 @@ namespace UmaCamera {
 			cameraPos = Vector3_t{ -51.72, 7.91, 108.57 };
 		}
 		else {
-			cameraPos = Vector3_t{ 0.093706, 0.467159, 9.588791 };
+			cameraPos = Vector3_t{ 0.0, 0., 0.0 };
 		}
 		cameraLookAt = Vector3_t{ cameraPos.x, cameraPos.y, cameraPos.z - look_radius };
 		horizontalAngle = 0;
