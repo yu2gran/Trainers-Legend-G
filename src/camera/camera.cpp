@@ -15,19 +15,19 @@
 #define KEY_SPACE  32
 
 /*
-×ø±ê:
-  ¡üy
-x¡û ¨Kz
+åæ ‡:
+  â†‘y
+xâ† â†˜z
 */
 namespace UmaCamera {
 	namespace {
 		int cameraType = CAMERA_LIVE;
 		float moveStep = 0.1;
-		float look_radius = 0.5;  // ×ªÏò°ë¾¶
-		float moveAngel = 3.5;  // ×ªÏò½Ç¶È
+		float look_radius = 0.0;  // è½¬å‘åŠå¾„
+		float moveAngel = 3.5;  // è½¬å‘è§’åº¦
 
-		float horizontalAngle = 0;  // Ë®Æ½·½Ïò½Ç¶È
-		float verticalAngle = 0;  // ´¹Ö±·½Ïò½Ç¶È
+		float horizontalAngle = 0;  // æ°´å¹³æ–¹å‘è§’åº¦
+		float verticalAngle = 0;  // å‚ç›´æ–¹å‘è§’åº¦
 
 		float raceDefaultFOV = 12;
 		int smoothLevel = 5;
@@ -190,10 +190,10 @@ namespace UmaCamera {
 		return cameraLookAt;
 	}
 
-	void set_lon_move(float degree) {  // Ç°ºóÒÆ¶¯
+	void set_lon_move(float degree) {  // å‰åç§»åŠ¨
 		auto radian = degree * 3.14159 / 180;
-		auto f_step = cos(radian) * moveStep / smoothLevel;  // ¡ü¡ı
-		auto l_step = sin(radian) * moveStep / smoothLevel;  // ¡û¡ú
+		auto f_step = cos(radian) * moveStep / smoothLevel;  // â†‘â†“
+		auto l_step = sin(radian) * moveStep / smoothLevel;  // â†â†’
 
 		for (int i = 0; i < smoothLevel; i++) {
 			cameraPos.z -= f_step;
@@ -223,7 +223,7 @@ namespace UmaCamera {
 		SDPoint pt2{lastFrame.x, lastFrame.z};
 		SDPoint ptOut{};
 		if (lookAtUmaReverse) {
-			ExPandLine(pt2, pt1, g_race_freecam_follow_umamusume_distance, ptOut);  // ´ÓÇ°Ãæ¿´, ºÙºÙ...ÂíÄï½¿ĞßµÄÉñÌ¬...ºÙºÙ...
+			ExPandLine(pt2, pt1, g_race_freecam_follow_umamusume_distance, ptOut);  // ä»å‰é¢çœ‹, å˜¿å˜¿...é©¬å¨˜å¨‡ç¾çš„ç¥æ€...å˜¿å˜¿...
 		}
 		else {
 			ExPandLine(pt1, pt2, g_race_freecam_follow_umamusume_distance, ptOut);
@@ -244,7 +244,7 @@ namespace UmaCamera {
 			printf("Race camera behind.\n");
 	}
 
-	void camera_forward() {  // ÏòÇ°
+	void camera_forward() {  // å‘å‰
 		if ((cameraType == CAMERA_RACE) && g_race_freecam_follow_umamusume){
 			g_race_freecam_follow_umamusume_offset.z -= moveStep / 2;
 			return;
@@ -252,7 +252,7 @@ namespace UmaCamera {
 		set_lon_move(verticalAngle);
 	}
 
-	void camera_back() {  // ºóÍË
+	void camera_back() {  // åé€€
 		if ((cameraType == CAMERA_RACE) && g_race_freecam_follow_umamusume) {
 			g_race_freecam_follow_umamusume_offset.z += moveStep / 2;
 			return;
@@ -260,7 +260,7 @@ namespace UmaCamera {
 		set_lon_move(verticalAngle + 180);
 	}
 
-	void camera_left() {  // Ïò×ó
+	void camera_left() {  // å‘å·¦
 		if ((cameraType == CAMERA_RACE) && g_race_freecam_follow_umamusume) {
 			g_race_freecam_follow_umamusume_offset.x += moveStep / 2;
 			return;
@@ -268,7 +268,7 @@ namespace UmaCamera {
 		set_lon_move(verticalAngle + 90);
 	}
 
-	void camera_right() {  // ÏòÓÒ
+	void camera_right() {  // å‘å³
 		if ((cameraType == CAMERA_RACE) && g_race_freecam_follow_umamusume) {
 			g_race_freecam_follow_umamusume_offset.x -= moveStep / 2;
 			return;
@@ -276,7 +276,7 @@ namespace UmaCamera {
 		set_lon_move(verticalAngle - 90);
 	}
 
-	void camera_down() {  // ÏòÏÂ
+	void camera_down() {  // å‘ä¸‹
 		if ((cameraType == CAMERA_RACE) && g_race_freecam_follow_umamusume) {
 			g_race_freecam_follow_umamusume_offset.y -= 0.2;
 			return;
@@ -297,7 +297,7 @@ namespace UmaCamera {
 		}
 	}
 	
-	void camera_up() {  // ÏòÉÏ
+	void camera_up() {  // å‘ä¸Š
 		if ((cameraType == CAMERA_RACE) && g_race_freecam_follow_umamusume) {
 			g_race_freecam_follow_umamusume_offset.y += 0.2;
 			return;
@@ -318,9 +318,9 @@ namespace UmaCamera {
 		}
 	}
 
-	void setVertLook(float angle1, float angle2) {  // ÉÏ+
+	void setVertLook(float angle1, float angle2) {  // ä¸Š+
 		auto radian = angle1 * 3.14159 / 180;
-		auto radian2 = ((double)angle2 - 90) * 3.14159 / 180;  // ÈÕ
+		auto radian2 = ((double)angle2 - 90) * 3.14159 / 180;  // æ—¥
 
 		auto stepX1 = look_radius * sin(radian2) * cos(radian) / smoothLevel;
 		auto stepX2 = look_radius * sin(radian2) * sin(radian) / smoothLevel;
@@ -335,7 +335,7 @@ namespace UmaCamera {
 
 	}
 
-	void setHoriLook(float degree) {  // ×ó+
+	void setHoriLook(float degree) {  // å·¦+
 		auto radian = degree * 3.14159 / 180;
 		auto stepBt = cos(radian) * look_radius / smoothLevel;
 		auto stepHi = sin(radian) * look_radius / smoothLevel;
