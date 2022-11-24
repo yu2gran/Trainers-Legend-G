@@ -24,7 +24,7 @@ namespace UmaCamera {
 		int cameraType = CAMERA_LIVE;
 		float moveStep = 0.1;
 		float look_radius = 0.0;  // 转向半径
-		float moveAngel = 3.5;  // 转向角度
+		float moveAngel = 45.0;  // 转向角度
 
 		float horizontalAngle = 0;  // 水平方向角度
 		float verticalAngle = 0;  // 垂直方向角度
