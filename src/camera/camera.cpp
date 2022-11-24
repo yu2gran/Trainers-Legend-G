@@ -23,7 +23,7 @@ namespace UmaCamera {
 	namespace {
 		int cameraType = CAMERA_LIVE;
 		float moveStep = 0.1;
-		float look_radius = 0.0001;  // 转向半径
+		float look_radius = 0.5;  // 转向半径
 		float moveAngel = 3.5;  // 转向角度
 
 		float horizontalAngle = 0;  // 水平方向角度
@@ -102,7 +102,7 @@ namespace UmaCamera {
 			DOUBLE b = 0.0;
 			k = (pt1.y - pt2.y) / (pt1.x - pt2.x);
 			b = pt1.y - k * pt1.x;
-			DOUBLE zoom = 0.0;
+			DOUBLE zoom = 2.0;
 			zoom = nLen / sqrt((pt2.x - pt1.x) * (pt2.x - pt1.x) + (pt2.y - pt1.y) * (pt2.y - pt1.y));
 
 			if (k > 0)
