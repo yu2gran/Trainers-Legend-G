@@ -25,7 +25,7 @@ namespace UmaCamera {
 		float moveStep = 0.1;
 		float look_radius = 9.0;  // 转向半径
 		float moveAngel = 3.5;  // 转向角度
-		SetCameraNearFar( 0.1f, 1000.0f ) ;
+		int SetCameraNearFar( 0.1f, 1000.0f ) ;
 		float horizontalAngle = 0;  // 水平方向角度
 		float verticalAngle = 0;  // 垂直方向角度
 
